@@ -1,0 +1,4 @@
+python-telegram-bot==20.7
+yt-dlp
+curl_cffi
+httpx[socks]
