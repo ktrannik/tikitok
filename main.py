@@ -191,27 +191,13 @@ def setup_webhook():
     webhook_url = f"{RAILWAY_URL}/webhook/{BOT_TOKEN}"
     print(f"🔗 Устанавливаю вебхук: {webhook_url}")
     
-    # Устанавливаем вебхук
-    result = telegram_app.bot.set_webhook(url=webhook_url)
+    # Устанавливаем вебхук с await
+    result = await telegram_app.bot.set_webhook(url=webhook_url)
     if result:
         print("✅ Вебхук успешно установлен!")
     else:
         print("❌ Ошибка установки вебхука!")
     
     # Показываем информацию о вебхуке
-    webhook_info = telegram_app.bot.get_webhook_info()
+    webhook_info = await telegram_app.bot.get_webhook_info()
     print(f"📡 Текущий вебхук: {webhook_info.url}")
-
-if __name__ == '__main__':
-    print("🚀 Запуск бота на Railway с Webhook...")
-    
-    # Устанавливаем вебхук перед запуском Flask
-    import asyncio
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(setup_webhook())
-    
-    # Запускаем Flask сервер
-    port = int(os.environ.get('PORT', 8080))
-    print(f"🔥 Flask сервер запущен на порту {port}")
-    flask_app.run(host='0.0.0.0', port=port)
