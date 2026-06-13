@@ -1,3 +1,6 @@
-python-telegram-bot==20.7
+python-telegram-bot>=21.0
+Flask>=2.0
 yt-dlp
 curl_cffi
+gunicorn
+httpx
