@@ -8,15 +8,15 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters
 import yt_dlp
 from curl_cffi import requests as curl_requests
 
-# ===== НАСТРОЙКИ =====
-BOT_TOKEN = os.environ.get("8798378718:AAGRxt_IwUR0m8a2M97l-5TPn8PhWpcNL9s")
-RAILWAY_URL = os.environ.get("tikitok-production.up.railway.app")  # Например: https://tikitok.up.railway.app
+# ===== НАСТРОЙКИ (ЖЁСТКО ПРОПИСАНЫ ДЛЯ ТЕСТА) =====
+BOT_TOKEN = "8798378718:AAGRxt_IwUR0m8a2M97l-5TPn8PhWpcNL9s"
+RAILWAY_URL = "https://tikitok-production.up.railway.app"  # Твой URL с https://
 
-# Проверка переменных
+# Проверка (уже не нужна, но оставим)
 if not BOT_TOKEN:
-    raise Exception("BOT_TOKEN не задан в переменных Railway!")
+    raise Exception("BOT_TOKEN не задан!")
 if not RAILWAY_URL:
-    raise Exception("RAILWAY_PUBLIC_DOMAIN не задан! Добавь переменную с твоим URL")
+    raise Exception("RAILWAY_PUBLIC_DOMAIN не задан!")
 
 # Flask приложение для вебхуков
 flask_app = Flask(__name__)
@@ -206,7 +206,6 @@ if __name__ == '__main__':
     print("🚀 Запуск бота на Railway с Webhook...")
     
     # Устанавливаем вебхук перед запуском Flask
-    # ВНИМАНИЕ! Для асинхронной установки используем run_until_complete
     import asyncio
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
