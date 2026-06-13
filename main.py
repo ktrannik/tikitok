@@ -150,12 +150,16 @@ def health():
     return 'ok', 200
 
 if __name__ == '__main__':
-    # Устанавливаем вебхук
+    # Пробуем получить домен от Railway
     railway_domain = os.environ.get("RAILWAY_PUBLIC_DOMAIN")
+    
     if railway_domain:
         webhook_url = f"https://{railway_domain}/webhook/{BOT_TOKEN}"
+        print(f"Устанавливаю вебхук: {webhook_url}")
         asyncio.run(telegram_app.bot.set_webhook(url=webhook_url))
-        print(f"Вебхук установлен: {webhook_url}")
+        print("Вебхук настроен!")
+    else:
+        print("⚠️ RAILWAY_PUBLIC_DOMAIN не задан, вебхук не установлен")
     
     port = int(os.environ.get('PORT', 8080))
     flask_app.run(host='0.0.0.0', port=port)
